@@ -7,20 +7,32 @@ import {
   CardContent,
   Typography,
   CircularProgress,
+  IconButton,
 } from "@mui/material";
+import { Trash2 } from "react-feather";
 
 import { coletasService } from "@/services";
 import { CreateColetaModal } from "./components";
+
 const Coletas = () => {
   const [coletas, setColetas] = useState([]);
   const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState(false);
 
+  const handleDelete = async (id) => {
+    try {
+      await coletasService.deleteColeta(id);
+
+      setColetas((prev) => prev.filter((c) => c.id !== id));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const loadColetas = async () => {
     try {
       setLoading(true);
       const response = await coletasService.getMyColetas();
-      console.log(response);
       setColetas(response.data);
     } catch (error) {
       console.error(error);
@@ -57,19 +69,30 @@ const Coletas = () => {
                   borderRadius: 3,
                   boxShadow: 3,
                   transition: "0.3s",
+                  position: "relative",
                   "&:hover": {
                     boxShadow: 6,
                     transform: "translateY(-4px)",
                   },
                 }}
               >
+                <IconButton
+                  onClick={() => handleDelete(coleta.id)}
+                  sx={{
+                    position: "absolute",
+                    top: 8,
+                    right: 8,
+                    backgroundColor: "rgba(255,255,255,0.8)",
+                    "&:hover": {
+                      backgroundColor: "rgba(255,0,0,0.2)",
+                    },
+                  }}
+                >
+                  <Trash2 size={18} />
+                </IconButton>
+
                 {coleta.image && (
-                  <Box
-                    sx={{
-                      height: 180,
-                      overflow: "hidden",
-                    }}
-                  >
+                  <Box sx={{ height: 180, overflow: "hidden" }}>
                     <img
                       src={`http://localhost:3001/uploads/${coleta.image}`}
                       alt="coleta"

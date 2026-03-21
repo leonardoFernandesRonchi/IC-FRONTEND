@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Box, Typography, Paper, Link } from "@mui/material";
 import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 import {
   InputField,
   SubmitButton,
@@ -9,7 +10,6 @@ import {
 } from "@/components";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import schema from "./schema";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { usersService } from "@/services";
 
 const Register = () => {

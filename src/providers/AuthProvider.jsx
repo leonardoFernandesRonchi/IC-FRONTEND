@@ -1,4 +1,4 @@
-import { useState, ReactNode, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { AuthContext } from "@/contexts";
 import { usersService } from "@/services";
 
@@ -10,7 +10,6 @@ const AuthProvider = ({ children }) => {
     try {
       setLoading(true);
       const response = await usersService.fetchUser();
-      console.log(response);
       setUser(response.data?.user);
     } catch {
       setUser(null);
@@ -22,8 +21,6 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     fetchUser();
   }, []);
-
-  console.log(user);
 
   const login = async () => {
     await fetchUser();

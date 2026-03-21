@@ -77,22 +77,25 @@ const CreateColetaModal = ({ open, setOpen, onSuccess }) => {
   };
 
   const onSubmit = async (data) => {
-    if (!position) {
-      alert("Selecione a localização.");
-      return;
+    try {
+      if (!position) {
+        alert("Selecione a localização.");
+        return;
+      }
+      await coletasService.createColeta({
+        latitude: position.lat,
+        longitude: position.lng,
+        description: data.description,
+        image: data.image,
+      });
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setOpen(false);
+      setPosition(null);
+      reset();
+      onSuccess();
     }
-
-    await coletasService.createColeta({
-      latitude: position.lat,
-      longitude: position.lng,
-      description: data.description,
-      image: data.image,
-    });
-
-    setOpen(false);
-    setPosition(null);
-    reset();
-    onSuccess();
   };
 
   return (
@@ -113,7 +116,6 @@ const CreateColetaModal = ({ open, setOpen, onSuccess }) => {
               }}
             />
 
-            {/* 🗺️ MAPA */}
             <Box sx={{ height: 300, width: "100%" }}>
               <MapContainer
                 center={[-22.2201, -49.9505]}
@@ -131,7 +133,6 @@ const CreateColetaModal = ({ open, setOpen, onSuccess }) => {
               </MapContainer>
             </Box>
 
-            {/* 📝 DESCRIPTION */}
             <Controller
               name="description"
               control={control}
@@ -148,7 +149,6 @@ const CreateColetaModal = ({ open, setOpen, onSuccess }) => {
               )}
             />
 
-            {/* 📁 IMAGE */}
             <Controller
               name="image"
               control={control}

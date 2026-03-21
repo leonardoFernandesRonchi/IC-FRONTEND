@@ -1,3 +1,5 @@
+import * as yup from "yup";
+
 const schema = yup.object().shape({
   description: yup
     .string()
@@ -5,9 +7,9 @@ const schema = yup.object().shape({
     .test(
       "word-limit",
       "Máximo de 20 palavras",
-      (value) => value && value.trim().split(/\s+/).length <= 20,
+      (value) => !value || value.trim().split(/\s+/).length <= 20,
     ),
-  image: yup.required("A imagem é obrigatória"),
+  image: yup.mixed().required("A imagem é obrigatória"),
 });
 
 export default schema;
