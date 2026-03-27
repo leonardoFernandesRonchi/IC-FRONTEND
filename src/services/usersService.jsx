@@ -20,7 +20,7 @@ const login = async ({ email, password }) => {
 };
 
 const fetchUser = async () => {
-  const response = await apiClient.get("/users/me");
+  const response = await apiClient.get("/users");
   return response;
 };
 
