@@ -19,9 +19,9 @@ const Coletas = () => {
   const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState(false);
 
-  const BACKEND_URL =
-    import.meta.env.VITE_API_URL?.replace("/api", "") ||
-    "http://localhost:3001";
+  const BACKEND_URL = (
+    import.meta.env.VITE_API_URL?.replace("/api", "") || "http://localhost:3001"
+  ).replace(/\/$/, "");
 
   const handleDelete = async (id) => {
     try {
@@ -67,6 +67,8 @@ const Coletas = () => {
             <Grid item xs={12} sm={6} md={4} lg={3} key={coleta.id}>
               <Card
                 sx={{
+                  minWidth: "100%",
+                  maxWidth: "100%",
                   height: "100%",
                   display: "flex",
                   flexDirection: "column",
@@ -101,7 +103,7 @@ const Coletas = () => {
                       src={`${BACKEND_URL}/uploads/${coleta.image}`}
                       alt="coleta"
                       style={{
-                        width: "100%",
+                        minWidth: "100%",
                         height: "100%",
                         objectFit: "cover",
                       }}
