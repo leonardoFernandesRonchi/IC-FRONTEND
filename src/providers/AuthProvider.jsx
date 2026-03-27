@@ -1,17 +1,20 @@
-import { useState, useEffect } from "react";
-import { AuthContext } from "@/contexts";
+import { useState, useEffect, createContext } from "react";
 import { usersService } from "@/services";
+
+export const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const fetchUser = async () => {
     try {
       setLoading(true);
-      const response = await usersService.fetchUser();
-      setUser(response.data?.user);
-    } catch {
+      const response = await usersService.fetchUser({
+        credentials: "include",
+      });
+      setUser(response.data?.user || null);
+    } catch (error) {
       setUser(null);
     } finally {
       setLoading(false);
@@ -29,9 +32,8 @@ const AuthProvider = ({ children }) => {
   const logout = async () => {
     try {
       setLoading(true);
-      await usersService.logOut();
-      await fetchUser();
       setUser(null);
+      await usersService.logOut();
     } catch (error) {
       console.error("Error logging out:", error);
     } finally {
