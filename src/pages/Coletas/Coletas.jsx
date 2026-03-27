@@ -94,7 +94,7 @@ const Coletas = () => {
                 {coleta.image && (
                   <Box sx={{ height: 180, overflow: "hidden" }}>
                     <img
-                      src={`http://localhost:3001/uploads/${coleta.image}`}
+                      src={`https://ic-backend-production-6479.up.railway.app/uploads/${coleta.image}`}
                       alt="coleta"
                       style={{
                         width: "100%",
