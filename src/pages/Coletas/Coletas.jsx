@@ -19,6 +19,10 @@ const Coletas = () => {
   const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState(false);
 
+  const BACKEND_URL =
+    import.meta.env.VITE_API_URL?.replace("/api", "") ||
+    "http://localhost:3001";
+
   const handleDelete = async (id) => {
     try {
       await coletasService.deleteColeta(id);
@@ -94,7 +98,7 @@ const Coletas = () => {
                 {coleta.image && (
                   <Box sx={{ height: 180, overflow: "hidden" }}>
                     <img
-                      src={`https://ic-backend-production-6479.up.railway.app/uploads/${coleta.image}`}
+                      src={`${BACKEND_URL}/uploads/${coleta.image}`}
                       alt="coleta"
                       style={{
                         width: "100%",
