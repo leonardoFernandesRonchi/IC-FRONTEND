@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const apiClient = axios.create({
-  baseURL: "http://localhost:3001/api",
+  baseURL: "ic-backend-production-6479.up.railway.app",
   headers: {
     "Content-Type": "application/json",
   },
