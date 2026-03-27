@@ -23,7 +23,8 @@ const AuthProvider = ({ children }) => {
   }, []);
 
   const login = async () => {
-    await fetchUser();
+    const userLogged = await fetchUser();
+    return userLogged?.data?.user;
   };
 
   const logout = async () => {

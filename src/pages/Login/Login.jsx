@@ -37,8 +37,10 @@ const Login = () => {
         email: data.email,
         password: data.password,
       });
-      await login();
-      navigate("/dashboard");
+      const loggedUser = await login();
+      if (loggedUser) {
+        navigate("/dashboard");
+      }
     } catch (error) {
       console.error(error);
     } finally {
