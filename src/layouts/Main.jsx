@@ -12,10 +12,12 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { usersService } from "@/services";
+import { useAuth } from "@/hooks/useAuth";
 
 const Main = () => {
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState(null);
+  const { logout } = useAuth();
 
   const handleOpenMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -27,7 +29,7 @@ const Main = () => {
 
   const handleLogout = async () => {
     handleCloseMenu();
-    await usersService.logOut();
+    await logout();
     navigate("/");
   };
 
