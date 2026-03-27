@@ -37,7 +37,7 @@ const Login = () => {
         email: data.email,
         password: data.password,
       });
-      login();
+      await login();
       navigate("/dashboard");
     } catch (error) {
       console.error(error);
