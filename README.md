@@ -1,16 +1,21 @@
-# React + Vite
+# 📌 IC-FRONTEND  
+![Status](https://img.shields.io/badge/status-em%20desenvolvimento-yellow)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 📖 Descrição
+Este repositório contém a aplicação **frontend** desenvolvida com **React + Vite**, responsável por exibir os resultados da análise de leveduras realizada por uma API de visão computacional.
 
-Currently, two official plugins are available:
+A aplicação atua como interface gráfica, permitindo que o usuário visualize de forma **simples, intuitiva e organizada** os dados processados pelo backend.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## ✨ Principais Características
+- ⚛️ Interface moderna construída com **React**
+- ⚡ Build otimizado com **Vite**
+- 🧩 Estrutura modular de componentes e assets
+- 🌐 Integração direta com o backend
+- 🚀 Deploy simplificado via **Vercel**
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🛠️ Tecnologias Utilizadas
+- React  
+- Vite  
+- JavaScript  
+- HTML  
+- CSS  
