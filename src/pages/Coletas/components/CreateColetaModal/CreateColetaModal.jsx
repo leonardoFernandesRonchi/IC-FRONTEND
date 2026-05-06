@@ -82,7 +82,7 @@ const CreateColetaModal = ({ open, setOpen, onSuccess }) => {
         alert("Selecione a localização.");
         return;
       }
-      await coletasService.createColeta({
+      await coletasService.create({
         latitude: position.lat,
         longitude: position.lng,
         description: data.description,

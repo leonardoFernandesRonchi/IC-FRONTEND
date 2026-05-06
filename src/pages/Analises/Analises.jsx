@@ -25,7 +25,7 @@ const Analises = () => {
   const loadColetas = async () => {
     try {
       setLoading(true);
-      const response = await coletasService.getMyColetas();
+      const response = await coletasService.getAll();
       setColetas(response.data);
     } catch (error) {
       console.error(error);

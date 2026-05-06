@@ -25,7 +25,7 @@ const Coletas = () => {
 
   const handleDelete = async (id) => {
     try {
-      await coletasService.deleteColeta(id);
+      await coletasService.remove(id);
 
       setColetas((prev) => prev.filter((c) => c.id !== id));
     } catch (error) {
@@ -36,7 +36,7 @@ const Coletas = () => {
   const loadColetas = async () => {
     try {
       setLoading(true);
-      const response = await coletasService.getMyColetas();
+      const response = await coletasService.getAll();
       setColetas(response.data);
     } catch (error) {
       console.error(error);

@@ -1,6 +1,6 @@
 import { apiClient } from "./apiClient";
 
-const createColeta = async ({ latitude, longitude, description, image }) => {
+const create = async ({ latitude, longitude, description, image }) => {
   const formData = new FormData();
 
   formData.append("latitude", latitude);
@@ -20,18 +20,18 @@ const createColeta = async ({ latitude, longitude, description, image }) => {
   return response;
 };
 
-const getMyColetas = async () => {
+const getAll = async () => {
   const response = await apiClient.get("/coletas");
   return response;
 };
 
-const deleteColeta = async (id) => {
+const remove = async (id) => {
   const response = await apiClient.delete(`/coletas/${id}`);
   return response;
 };
 
 export default {
-  createColeta,
-  getMyColetas,
-  deleteColeta,
+  create,
+  getAll,
+  remove,
 };
