@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { Login, Register, Coletas } from "@/pages";
+import { Login, Register, Coletas, Analises } from "@/pages";
 import { Main } from "@/layouts";
 import { ProtectedRoute, LoggedRoute } from "./routes";
 export default function App() {
@@ -12,6 +12,9 @@ export default function App() {
       <Route element={<ProtectedRoute />}>
         <Route element={<Main />}>
           <Route path="/dashboard" element={<Coletas />} />
+        </Route>
+        <Route element={<Main />}>
+          <Route path="/analises" element={<Analises />} />
         </Route>
       </Route>
     </Routes>
