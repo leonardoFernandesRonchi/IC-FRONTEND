@@ -10,13 +10,20 @@ import {
   InputLabel,
   Select,
   MenuItem,
+  Typography,
 } from "@mui/material";
 
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import schema from "./schema";
 
-const CreateAnaliseModal = ({ open, setOpen, onSuccess, coletasMicroscopicas, coletasColonia }) => {
+const CreateAnaliseModal = ({
+  open,
+  setOpen,
+  onSuccess,
+  coletasMicroscopicas,
+  coletasColonia,
+}) => {
   const {
     control,
     handleSubmit,
@@ -84,8 +91,8 @@ const CreateAnaliseModal = ({ open, setOpen, onSuccess, coletasMicroscopicas, co
                     </InputLabel>
                     {coletasMicroscopicas.length === 0 ? (
                       <Typography variant="body2" color="textSecondary">
-                        Você precisa criar uma coleta antes de criar uma
-                        análise.
+                        Você precisa criar uma coleta microscópica antes de
+                        criar uma análise.
                       </Typography>
                     ) : (
                       <Select
@@ -114,8 +121,8 @@ const CreateAnaliseModal = ({ open, setOpen, onSuccess, coletasMicroscopicas, co
                     <InputLabel id="idade-label">Imagem da Colonia</InputLabel>
                     {coletasColonia.length === 0 ? (
                       <Typography variant="body2" color="textSecondary">
-                        Você precisa criar uma coleta antes de criar uma
-                        análise.
+                        Você precisa criar uma coleta da colônia antes de criar
+                        uma análise.
                       </Typography>
                     ) : (
                       <Select
