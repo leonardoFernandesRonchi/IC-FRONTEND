@@ -45,6 +45,9 @@ const Coletas = () => {
     }
   };
 
+
+  
+
   useEffect(() => {
     loadColetas();
   }, []);

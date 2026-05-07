@@ -1,11 +1,12 @@
 import { apiClient } from "./apiClient";
 
-const create = async ({ latitude, longitude, description, image }) => {
+const create = async ({ latitude, longitude, description, image, coletaType }) => {
   const formData = new FormData();
 
   formData.append("latitude", latitude);
   formData.append("longitude", longitude);
   formData.append("description", description);
+  formData.append("coletaType", coletaType);
 
   if (image) {
     formData.append("image", image);
@@ -20,8 +21,13 @@ const create = async ({ latitude, longitude, description, image }) => {
   return response;
 };
 
-const getAll = async () => {
-  const response = await apiClient.get("/coletas");
+const getAll = async (coletaType) => {
+  const response = await apiClient.get("/coletas", {
+    params: {
+      coletaType
+    }
+  }
+  );
   return response;
 };
 

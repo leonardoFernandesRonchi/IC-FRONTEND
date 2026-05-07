@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   Dialog,
   DialogTitle,
@@ -13,20 +12,14 @@ import {
   MenuItem,
 } from "@mui/material";
 
-import { MapContainer, TileLayer, Marker, useMapEvents } from "react-leaflet";
-import L from "leaflet";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import schema from "./schema";
-import { coletasService } from "@/services";
 
-const CreateAnaliseModal = ({ open, setOpen, onSuccess, coletas }) => {
+const CreateAnaliseModal = ({ open, setOpen, onSuccess, coletasMicroscopicas, coletasColonia }) => {
   const {
     control,
     handleSubmit,
-    reset,
-    setValue,
-    field,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
@@ -89,7 +82,7 @@ const CreateAnaliseModal = ({ open, setOpen, onSuccess, coletas }) => {
                     <InputLabel id="idade-label">
                       Imagem Microscópica
                     </InputLabel>
-                    {coletas.length === 0 ? (
+                    {coletasMicroscopicas.length === 0 ? (
                       <Typography variant="body2" color="textSecondary">
                         Você precisa criar uma coleta antes de criar uma
                         análise.
@@ -100,7 +93,7 @@ const CreateAnaliseModal = ({ open, setOpen, onSuccess, coletas }) => {
                         labelId="idade-label"
                         label="Imagem Microscópica"
                       >
-                        {coletas.map((coleta) => (
+                        {coletasMicroscopicas.map((coleta) => (
                           <MenuItem key={coleta.id} value={coleta.id}>
                             {coleta.description}
                           </MenuItem>
@@ -119,7 +112,7 @@ const CreateAnaliseModal = ({ open, setOpen, onSuccess, coletas }) => {
                 render={({ field }) => (
                   <FormControl fullWidth>
                     <InputLabel id="idade-label">Imagem da Colonia</InputLabel>
-                    {coletas.length === 0 ? (
+                    {coletasColonia.length === 0 ? (
                       <Typography variant="body2" color="textSecondary">
                         Você precisa criar uma coleta antes de criar uma
                         análise.
@@ -130,7 +123,7 @@ const CreateAnaliseModal = ({ open, setOpen, onSuccess, coletas }) => {
                         labelId="idade-label"
                         label="Imagem da Colonia"
                       >
-                        {coletas.map((coleta) => (
+                        {coletasColonia.map((coleta) => (
                           <MenuItem key={coleta.id} value={coleta.id}>
                             {coleta.description}
                           </MenuItem>

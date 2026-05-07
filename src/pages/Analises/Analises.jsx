@@ -9,24 +9,24 @@ import {
   CircularProgress,
   IconButton,
 } from "@mui/material";
-import { Trash2 } from "react-feather";
 
 import CreateAnaliseModal from "./components/CreateAnaliseModal";
 import { coletasService } from "@/services";
-import { Create } from "@mui/icons-material";
 
 const Analises = () => {
-  const [coletas, setColetas] = useState([]);
+  const [coletasMicroscopicas, setColetasMicroscopicas] = useState([])
+  const [coletasColonia, setColetasColonia] = useState([])
   const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState(false);
 
-  console.log(coletas);
 
-  const loadColetas = async () => {
+  const loadColetas = async (setState, coletaType) => {
     try {
       setLoading(true);
-      const response = await coletasService.getAll();
-      setColetas(response.data);
+      const response = await coletasService.getAll(
+        coletaType
+      );
+      setState(response.data);
     } catch (error) {
       console.error(error);
     } finally {
@@ -34,8 +34,16 @@ const Analises = () => {
     }
   };
 
+  const loadAllColetas = () => {
+   loadColetas(setColetasMicroscopicas, "Microscópica");
+    loadColetas(setColetasColonia, "Colonia")
+  }
+
+
+  console.log(coletasMicroscopicas)
+  console.log(coletasColonia)
   useEffect(() => {
-    loadColetas();
+   loadAllColetas()
   }, []);
   return (
     <Box p={3}>
@@ -51,8 +59,9 @@ const Analises = () => {
       <CreateAnaliseModal
         open={open}
         setOpen={setOpen}
-        onSuccess={loadColetas}
-        coletas={coletas}
+        onSuccess={loadAllColetas}
+        coletasMicroscopicas={coletasMicroscopicas}
+        coletasColonia={coletasColonia}
       />
     </Box>
   );

@@ -10,6 +10,7 @@ const schema = yup.object().shape({
       (value) => !value || value.trim().split(/\s+/).length <= 20,
     ),
   image: yup.mixed().required("A imagem é obrigatória"),
+  coletaType: yup.mixed().required("Tipo da coleta é obrigatório"),
 });
 
 export default schema;
