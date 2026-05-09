@@ -71,86 +71,104 @@ const Coletas = () => {
       {loading ? (
         <CircularProgress />
       ) : (
-        <Grid mt={5} container spacing={3}>
+        <Box
+          sx={{
+            mt: 5,
+            display: "flex",
+            flexWrap: "wrap",
+            gap: 3,
+            alignItems: "flex-start",
+          }}
+        >
           {coletas.map((coleta) => (
-            <Grid item xs={12} sm={6} md={4} lg={3} key={coleta.id}>
-              <Card
+            <Card
+              key={coleta.id}
+              sx={{
+                width: {
+                  xs: "100%",
+                  sm: "calc(50% - 12px)",
+                  md: "30%",
+                  lg: "15%",
+                },
+
+                borderRadius: 3,
+                boxShadow: 3,
+                transition: "0.3s",
+                position: "relative",
+                overflow: "hidden",
+
+                "&:hover": {
+                  boxShadow: 6,
+                  transform: "translateY(-4px)",
+                },
+              }}
+            >
+              <IconButton
+                onClick={() => handleDelete(coleta.id)}
                 sx={{
-                  width: "100%",
-                  maxWidth: "100%",
-                  borderRadius: 3,
-                  boxShadow: 3,
-                  transition: "0.3s",
-                  position: "relative",
+                  position: "absolute",
+                  top: 8,
+                  right: 8,
+                  zIndex: 2,
+                  backgroundColor: "rgba(255,255,255,0.85)",
+
                   "&:hover": {
-                    boxShadow: 6,
-                    transform: "translateY(-4px)",
+                    backgroundColor: "rgba(255,0,0,0.15)",
                   },
                 }}
               >
-                <IconButton
-                  onClick={() => handleDelete(coleta.id)}
+                <Trash2 size={18} />
+              </IconButton>
+
+              {coleta.image && (
+                <Box
                   sx={{
-                    position: "absolute",
-                    top: 8,
-                    right: 8,
-                    backgroundColor: "rgba(255,255,255,0.8)",
-                    "&:hover": {
-                      backgroundColor: "rgba(255,0,0,0.2)",
-                    },
+                    width: "100%",
+                    height: 180,
+                    overflow: "hidden",
                   }}
                 >
-                  <Trash2 size={18} />
-                </IconButton>
-
-                {coleta.image && (
-                  <Box
-                    sx={{
+                  <img
+                    src={`${BACKEND_URL}/uploads/${coleta.image}`}
+                    alt="coleta"
+                    style={{
                       width: "100%",
-                      height: 180,
-                      overflow: "hidden",
+                      height: "100%",
+                      objectFit: "cover",
+                      display: "block",
                     }}
-                  >
-                    <img
-                      src={`${BACKEND_URL}/uploads/${coleta.image}`}
-                      alt="coleta"
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                        objectFit: "cover",
-                        display: "block",
-                      }}
-                    />
-                  </Box>
-                )}
+                  />
+                </Box>
+              )}
 
-                <CardContent sx={{ flexGrow: 1 }}>
-                  <Typography
-                    variant="h6"
-                    sx={{
-                      fontWeight: 600,
-                      mb: 1,
-                      display: "-webkit-box",
-                      WebkitLineClamp: 2,
-                      WebkitBoxOrient: "vertical",
-                      overflow: "hidden",
-                    }}
-                  >
-                    {coleta.description}
-                  </Typography>
+              <CardContent>
+                <Typography
+                  variant="h6"
+                  sx={{
+                    fontWeight: 700,
+                    mb: 1,
+                    lineHeight: 1.2,
 
-                  <Typography variant="body2" color="text.secondary">
-                    📍 Lat: {coleta?.latitude?.toFixed(15)}
-                  </Typography>
+                    display: "-webkit-box",
+                    WebkitLineClamp: 2,
+                    WebkitBoxOrient: "vertical",
+                    overflow: "hidden",
+                  }}
+                >
+                  {coleta.description}
+                </Typography>
 
-                  <Typography variant="body2" color="text.secondary">
-                    📍 Lng: {coleta?.longitude?.toFixed(15)}
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
+                <Typography variant="body2" color="text.secondary">
+                  📍 Lat: {coleta?.latitude?.toFixed(15)}
+                </Typography>
+
+                <Typography variant="body2" color="text.secondary">
+                  📍 Lng: {coleta?.longitude?.toFixed(15)}
+                </Typography>
+              </CardContent>
+            </Card>
           ))}
-        </Grid>
+        </Box>
       )}
 
       <CreateColetaModal

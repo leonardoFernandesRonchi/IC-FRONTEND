@@ -57,12 +57,13 @@ const Analises = () => {
   }, []);
 
   return (
-    <Box p={{ xs: 2, md: 4 }}>
+    <Box pt={6}>
       <Box
         display="flex"
         justifyContent="space-between"
         alignItems={{ xs: "stretch", sm: "center" }}
         flexDirection={{ xs: "column", sm: "row" }}
+        pt={3}
         gap={2}
         mb={4}
       >
@@ -107,9 +108,14 @@ const Analises = () => {
           <CircularProgress />
         </Box>
       ) : (
-        <Grid container spacing={3}>
+        <Box width="100%" height="100%" display="flex" flexWrap="wrap" gap={1}>
           {analises.map((analise) => (
-            <Grid item xs={12} md={6} xl={4} key={analise.id}>
+            <Box
+              display="flex"
+              flexWrap="nowrap"
+              gap={3}
+              key={analise.id_analise}
+            >
               <Card
                 sx={{
                   height: "100%",
@@ -233,27 +239,31 @@ const Analises = () => {
                       {[
                         {
                           label: "Média",
-                          value: `${analise.resultado.area_microns.media?.toFixed(
-                            3,
-                          )} µm²`,
+                          value:
+                            analise.resultado.area_microns.media != null
+                              ? `${analise.resultado.area_microns.media.toFixed(3)} µm²`
+                              : "0.000 µm²",
                         },
                         {
                           label: "Desvio padrão",
-                          value: `${analise.resultado.area_microns.desvio_padrao?.toFixed(
-                            3,
-                          )}`,
+                          value:
+                            analise.resultado.area_microns.desvio_padrao != null
+                              ? `${analise.resultado.area_microns.desvio_padrao.toFixed(3)}`
+                              : "0.000",
                         },
                         {
                           label: "Menor",
-                          value: `${analise.resultado.area_microns.min?.toFixed(
-                            3,
-                          )} µm²`,
+                          value:
+                            analise.resultado.area_microns.min != null
+                              ? `${analise.resultado.area_microns.min.toFixed(3)} µm²`
+                              : "0.000 µm²",
                         },
                         {
                           label: "Maior",
-                          value: `${analise.resultado.area_microns.max?.toFixed(
-                            3,
-                          )} µm²`,
+                          value:
+                            analise.resultado.area_microns.max != null
+                              ? `${analise.resultado.area_microns.max.toFixed(3)} µm²`
+                              : "0.000 µm²",
                         },
                       ].map((item) => (
                         <Grid item xs={6} key={item.label}>
@@ -262,6 +272,10 @@ const Analises = () => {
                               p: 1.2,
                               borderRadius: 3,
                               backgroundColor: "#f8fafc",
+                              minHeight: 72,
+                              display: "flex",
+                              flexDirection: "column",
+                              justifyContent: "center",
                             }}
                           >
                             <Typography
@@ -335,7 +349,9 @@ const Analises = () => {
                               color: "#0f172a",
                             }}
                           >
-                            {analise.resultado.circularidade.media?.toFixed(3)}
+                            {analise.resultado.circularidade.media != null
+                              ? analise.resultado.circularidade.media.toFixed(3)
+                              : "0.000"}
                           </Typography>
                         </Box>
                       </Grid>
@@ -365,9 +381,11 @@ const Analises = () => {
                               color: "#0f172a",
                             }}
                           >
-                            {analise.resultado.relacao_aspecto.media?.toFixed(
-                              3,
-                            )}
+                            {analise.resultado.relacao_aspecto.media != null
+                              ? analise.resultado.relacao_aspecto.media.toFixed(
+                                  3,
+                                )
+                              : "0.000"}
                           </Typography>
                         </Box>
                       </Grid>
@@ -375,9 +393,9 @@ const Analises = () => {
                   </Box>
                 </CardContent>
               </Card>
-            </Grid>
+            </Box>
           ))}
-        </Grid>
+        </Box>
       )}
     </Box>
   );
