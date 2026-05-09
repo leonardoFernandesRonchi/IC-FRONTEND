@@ -88,7 +88,7 @@ const CreateColetaModal = ({ open, setOpen, onSuccess }) => {
         longitude: position.lng,
         description: data.description,
         image: data.image,
-        coletaType: data.coletaType
+        coletaType: data.coletaType,
       });
     } catch (error) {
       console.error(error);
@@ -151,30 +151,25 @@ const CreateColetaModal = ({ open, setOpen, onSuccess }) => {
               )}
             />
 
-
             <Controller
-  name="coletaType"
-  control={control}
-  defaultValue=""
-  render={({ field }) => (
-    <TextField
-      {...field}
-      select
-      label="Tipo de Coleta"
-      fullWidth
-      error={!!errors.coletaType}
-      helperText={errors.coletaType?.message}
-    >
-      <MenuItem value="Microscópica">
-        Microscópica
-      </MenuItem>
+              name="coletaType"
+              control={control}
+              defaultValue=""
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  select
+                  label="Tipo de Coleta"
+                  fullWidth
+                  error={!!errors.coletaType}
+                  helperText={errors.coletaType?.message}
+                >
+                  <MenuItem value="Microscópica">Microscópica</MenuItem>
 
-      <MenuItem value="Colonia">
-        Colônia
-      </MenuItem>
-    </TextField>
-  )}
-/>
+                  <MenuItem value="Colonia">Colônia</MenuItem>
+                </TextField>
+              )}
+            />
             <Controller
               name="image"
               control={control}
@@ -187,7 +182,6 @@ const CreateColetaModal = ({ open, setOpen, onSuccess }) => {
                 />
               )}
             />
-
           </Box>
         </DialogContent>
 

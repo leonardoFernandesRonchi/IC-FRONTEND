@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import {
   Dialog,
   DialogTitle,
@@ -13,8 +15,10 @@ import {
   Typography,
 } from "@mui/material";
 
-import { useForm, Controller } from "react-hook-form";
+import { useForm, Controller, set } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { analisesService } from "@/services";
+
 import schema from "./schema";
 
 const CreateAnaliseModal = ({
@@ -24,6 +28,7 @@ const CreateAnaliseModal = ({
   coletasMicroscopicas,
   coletasColonia,
 }) => {
+  const [loading, setLoading] = useState(false);
   const {
     control,
     handleSubmit,
@@ -37,7 +42,25 @@ const CreateAnaliseModal = ({
   });
 
   const onSubmit = async (data) => {
-    console.log(data);
+    try {
+      console.log(data);
+      setLoading(true);
+      await analisesService.create({
+        nome_amostra: data.nome,
+        descricao: data.description,
+        imagem_microscopica: data.imagemMicroscopica,
+        imagem_colonia: data.imagemColonia,
+      });
+      onSuccess();
+      alert(
+        "Análise criada com sucesso! Espere enquanto o processament é concluído.",
+      );
+      setOpen(false);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (

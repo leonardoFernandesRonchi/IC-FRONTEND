@@ -45,36 +45,39 @@ const Coletas = () => {
     }
   };
 
-
-  
-
   useEffect(() => {
     loadColetas();
   }, []);
 
   return (
     <Box p={3}>
-      <Box display="flex" justifyContent="space-between" mt={5}>
+      <Box display="flex" flexWrap="wrap" justifyContent="space-between" mt={5}>
         <Typography variant="h4">Minhas Coletas</Typography>
 
-        <Button variant="contained" onClick={() => setOpen(true)}>
-          Criar nova coleta
+        <Button
+          sx={{
+            minWidth: {
+              xs: "auto",
+              sm: 10,
+            },
+          }}
+          variant="contained"
+          onClick={() => setOpen(true)}
+        >
+          Nova coleta
         </Button>
       </Box>
 
       {loading ? (
         <CircularProgress />
       ) : (
-        <Grid container spacing={3}>
+        <Grid mt={5} container spacing={3}>
           {coletas.map((coleta) => (
             <Grid item xs={12} sm={6} md={4} lg={3} key={coleta.id}>
               <Card
                 sx={{
-                  minWidth: "100%",
+                  width: "100%",
                   maxWidth: "100%",
-                  height: "100%",
-                  display: "flex",
-                  flexDirection: "column",
                   borderRadius: 3,
                   boxShadow: 3,
                   transition: "0.3s",
@@ -101,14 +104,21 @@ const Coletas = () => {
                 </IconButton>
 
                 {coleta.image && (
-                  <Box sx={{ height: 180, overflow: "hidden" }}>
+                  <Box
+                    sx={{
+                      width: "100%",
+                      height: 180,
+                      overflow: "hidden",
+                    }}
+                  >
                     <img
                       src={`${BACKEND_URL}/uploads/${coleta.image}`}
                       alt="coleta"
                       style={{
-                        minWidth: "100%",
+                        width: "100%",
                         height: "100%",
                         objectFit: "cover",
+                        display: "block",
                       }}
                     />
                   </Box>
@@ -130,11 +140,11 @@ const Coletas = () => {
                   </Typography>
 
                   <Typography variant="body2" color="text.secondary">
-                    📍 Lat: {coleta.latitude}
+                    📍 Lat: {coleta?.latitude?.toFixed(15)}
                   </Typography>
 
                   <Typography variant="body2" color="text.secondary">
-                    📍 Lng: {coleta.longitude}
+                    📍 Lng: {coleta?.longitude?.toFixed(15)}
                   </Typography>
                 </CardContent>
               </Card>
