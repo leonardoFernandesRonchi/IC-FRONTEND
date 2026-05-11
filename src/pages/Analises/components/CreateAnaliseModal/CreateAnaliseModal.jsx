@@ -15,7 +15,7 @@ import {
   Typography,
 } from "@mui/material";
 
-import { useForm, Controller, set } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { analisesService } from "@/services";
 

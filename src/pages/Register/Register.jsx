@@ -51,6 +51,7 @@ const Register = () => {
       });
     } finally {
       setLoading(false);
+      setBlock(false);
     }
   };
 
